@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ex';
+  player1: string;
+  player2: string;
+  constructor() { }
+
+
+
 }
