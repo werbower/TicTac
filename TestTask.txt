@@ -1,0 +1,90 @@
+General
+1.
+a. document object model: 
+objects describe html elements (with properties, methods, events) and provide api for js
+b. js object notation: text object notation based on js
+c. async js and xml: async requests to server without rerendering entire page
+d. loop that moves events(functions) from the event queue to the stack
+e. key-value pairs assotiated with document
+f. headers that describe different standard request properties: accept, connection, date...
+2.
+frameworks aim to reduce render operations
+3.
+ var inter = setInterval(function f() { 
+this.fld++; 
+cnt++; 
+if (cnt >= 3) 
+clearInterval(inter); 
+console.log(this.fld); 
+   }, 3000); 
+
+this === window => (this.fld === undefined)
+
+ var inter = setInterval(() => { 
+this.fld++; 
+cnt++; 
+if (cnt >= 3) 
+clearInterval(inter); 
+console.log(this.fld); 
+   }, 3000);
+
+this === obj=> (this.fld === obj.fld)
+
+css
+1.
+input, button
+2
+input.card
+3
+div.wrapper > input
+4
+input[type="number"]
+
+Javascript
+1
+function g(n) {
+    return [...Array(n)].map((x) => String.fromCharCode(97+Math.round(Math.random()*25))).join('')
+}
+2
+function s(arr1, arr2) {
+    return arr1.filter(x => arr2.indexOf(x)> -1).sort((a, b) =>a - b).map(x => String(x));
+}
+
+promises
+
+// 1
+function arrM(arr1, arr2) {
+    return new Promise((resolve, reject) => {
+        if (arr1.length !== arr2.length) {
+            reject(new Error('error'));
+        } else {
+            resolve(arr1.map((x, i) => x*arr2[i]));
+        }
+    });
+}
+
+arrM([1,2,3], [4,5,6]).then(
+    result => console.log(result)
+);
+
+const a = [1,1,1,1,];
+const b = [2,2,2,2,];
+const c = [3,3,3,3,];
+const d = [4,4,4,4,];
+const e = [5,5,5,5];
+const f = [6,6,6,6];
+
+// 2
+arrM(a,b).then(x => {
+    console.log('step 1: ', x);
+    return x;
+}).then(x => {
+    return arrM(x,c);
+}).then(x => {
+    console.log('step 2: ', x);
+    return arrM(x, d);
+}).then(x => console.log('step 3: ', x));
+
+// 3
+arr = [arrM(a,b), arrM(c,d), arrM(e,f)];
+Promise.all(arr).then( res => console.log('done: ',res));
