@@ -6,38 +6,33 @@
 
 </div>
 <div class="players">
-  <mat-form-field >
-    <input matInput placeholder="player 1" [(ngModel)]="player1">
-  </mat-form-field>
+  <div>
+      <mat-icon [ngClass]="{'selected': currentPlayer===player1}">{{player1.icon}}</mat-icon>
+      <mat-form-field>
+        <input matInput placeholder="player 1" [(ngModel)]="player1.name">
+      </mat-form-field>
+  </div>
 
-  <mat-form-field >
-    <input matInput placeholder="player 2" [(ngModel)]="player2">
-  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onStart()">Start</button>
+
+  <div>
+      <mat-icon [ngClass]="{'selected': currentPlayer===player2}">{{player2.icon}}</mat-icon>
+      <mat-form-field >
+        <input matInput placeholder="player 2" [(ngModel)]="player2.name">
+      </mat-form-field>
+  </div>
+
 </div>
 
-<div class="start">
-  <button mat-raised-button color="primary">Start</button>
-</div>
+<h1 class="status-line">{{getStatus()}}</h1>
 
-<mat-grid-list cols="3" rowHeight="1:1">
-    <mat-grid-tile>
-        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
-            <mat-icon>{{'favorite'}}</mat-icon>
-          </button>
+<mat-grid-list cols="3" rowHeight="1:1" gutterSize="3px" *ngIf="boxes.length">
+
+    <mat-grid-tile *ngFor="let box of boxes">
+        <button mat-icon-button color="primary" aria-label="" (click)="onHit(box)" [disabled]="box.player">
+            <mat-icon>{{box?.player?.icon}}</mat-icon>
+        </button>
       </mat-grid-tile>
-    <mat-grid-tile>
-        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
-            <mat-icon>{{'clear'}}</mat-icon>
-          </button>
-
-    </mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
-    <mat-grid-tile>6</mat-grid-tile>
-    <mat-grid-tile>7</mat-grid-tile>
-    <mat-grid-tile>8</mat-grid-tile>
-    <mat-grid-tile>9</mat-grid-tile>
   </mat-grid-list>
 
 
